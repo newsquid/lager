@@ -1,5 +1,5 @@
 This is the our logger setup (/lager, gitit?)
-It consist of two simple, configurable components:
+The server consist of two simple, configurable components:
 1.
 	An nginx configuration (~/default) that:
 		*Allows CORS quite freely and
@@ -9,3 +9,6 @@ It consist of two simple, configurable components:
 2.
 	A logrotate script (~/nginx) that manages the rotation of the access.log
 	file.
+
+And clients simply do http request to the server, in a manner that is
+(hopefully) idiomatic to their language.
