@@ -1,0 +1,24 @@
+/var/log/nginx/*.log {
+        #rotate once a day
+	daily
+	missingok
+	#use a date extension instead of sequential ids
+	dateext
+	#start use yesterday, as the log will be 1 day old when rotated
+	dateyesterday
+	#Keep 62 rotation (~ two months)
+	rotate 62
+	compress
+	delaycompress
+	notifempty
+	create 0640 www-data adm
+	sharedscripts
+	prerotate
+		if [ -d /etc/logrotate.d/httpd-prerotate ]; then \
+			run-parts /etc/logrotate.d/httpd-prerotate; \
+		fi \
+	endscript
+	postrotate
+		[ -s /run/nginx.pid ] && kill -USR1 `cat /run/nginx.pid`
+	endscript
+}
