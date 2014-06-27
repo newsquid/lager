@@ -28,17 +28,27 @@ server {
 
 	location / {
 		# Allow CORS so that this server can be used as an "API"
+		auth_basic "restricted";
+		auth_basic_user_file /home/lagger/basicauthfile;
 		add_header 'Access-Control-Allow-Origin' '*';
 		add_header 'Access-Control-Allow-Credentials' 'true';
 		add_header 'Access-Control-Allow-Methods' 'GET, HEAD';
 		add_header 'Access-Control-Allow-Headers' '*';
 
+		try_files $uri $uri/ =404;
+
 		#Log in a custom format
                 log_format logger_serv '$remote_addr - $time_iso8601 - '
-		'msg: $arg_msg - origin: $arg_origin - $args - $request';
+		'msg: $arg_msg - origin: $arg_origin - $args - $request - $status';
 
-                access_log /var/log/nginx/access.log logger_serv;
-		try_files $uri $uri/ =404;
+		if ($status != "401") {
+             		access_log /var/log/nginx/access.log logger_serv;
+		}
+
+		if ($status = "401") {
+			access_log /dev/null;
+		}
+
 	}
 
 	# Only for nginx-naxsi used with nginx-naxsi-ui : process denied requests
