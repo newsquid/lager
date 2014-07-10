@@ -3,13 +3,18 @@ var Lager = (function() {
         setServer: function(addr) {
             server = addr;
         },
+        setBasicAuth: function(id, key) {
+            server_id = id;
+            server_key = key;
+        },
+        setOrigin: function(identifier) {
+            origin = identifier;
+        },
         log: function(message) {
-            $.ajax ({
-                url: server,
-                type: 'get',
-                cache: false,
-                data: { msg: message, origin: 'not impl yet' }
-            });
+            var pars = encodeURI("?msg=" + message + "&origin=" + origin);
+            xhr = new XMLHttpRequest();
+            xhr.open('HEAD', server + pars);
+            xhr.send();
         }
     }
     return Lager
