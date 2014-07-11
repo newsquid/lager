@@ -1,14 +1,17 @@
+#Lager
 This is the our logger setup (/lager, gitit?)
-The server consist of two simple, configurable components:
-1.
-	An nginx configuration (~/default) that:
-		*Allows CORS quite freely and
-		*Logs certain request data, such as certain url parameters, to
-		 the log file (/var/log/nginx/access.log)
+##The server
+The server consist of simple, configurable components:
 
-2.
-	A logrotate script (~/nginx) that manages the rotation of the access.log
-	file.
+1. An nginx configuration (~/default) that:
+	* Allows CORS quite freely and
+	* Logs certain request data, such as certain url parameters, to
+	the log file (/var/log/nginx/access.log)
 
-And clients simply do http request to the server, in a manner that is
+2. A logrotate script (~/nginx) that manages the rotation of the access.log file.
+
+3. A few scripts to filter and peruse the log files.
+
+##The clients
+Clients simply do appropriate http request to the server, in a manner that is
 (hopefully) idiomatic to their language.
