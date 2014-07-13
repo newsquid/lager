@@ -4,6 +4,7 @@ This is the our logger setup (/lager, gitit?)
 The server consist of simple, configurable components:
 
 1. An nginx configuration (server/default) that:
+	* Listens on port 81, and allows only HEAD requests.
 	* Allows CORS quite freely and
 	* Logs certain request data, such as certain url parameters, to
 	the log file (/var/log/nginx/access.log)
