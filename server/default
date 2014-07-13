@@ -33,9 +33,10 @@ server {
 			deny all;
 		}
 
-		#Log in a custom format
-		#We use the pipe ('|') as separator, as it can't be part of any of the fields.
-               	log_format logger_serv '$remote_addr | $time_iso8601 | '
+		# Log in a custom format
+		# We use the pipe ('|') as separator, as it can't be part of any of the
+		#+ fields due to the iso format and url encoding.
+		log_format logger_serv '$remote_addr | $time_iso8601 | '
 		'msg: $arg_msg | origin: $arg_origin | $args | $request | $status';
         	access_log /var/log/nginx/access.log logger_serv;
 	}
