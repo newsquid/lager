@@ -3,10 +3,6 @@ var Lager = (function() {
         setServer: function(addr) {
             server = addr;
         },
-        setBasicAuth: function(id, key) {
-            server_id = id;
-            server_key = key;
-        },
         setOrigin: function(identifier) {
             origin = identifier;
         },
